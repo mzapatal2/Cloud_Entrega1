@@ -1,0 +1,32 @@
+version: "3.8"
+services: 
+  libros-api:
+    build: .
+    container_name: libros_api_app
+    networks:
+      - web_net
+    ports:
+     - "5000:5000"
+    depends_on: 
+      - db
+  db: 
+    container_name: libro_db_pg
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: libros
+      POSTGRES_DB: libros
+    image: "postgres:latest"
+    networks:
+      - web_net
+    ports: 
+      - "5432:5432"
+    volumes: 
+      - ${PWD}/postgres-data:/var/lib/postgresql/data
+
+networks:
+    web_net:
+        driver: bridge
+
+volumes: 
+  pg-data: 
+    driver: local
