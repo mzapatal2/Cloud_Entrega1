@@ -2,23 +2,24 @@ from datetime import datetime, timedelta
 import os
 from os import getcwd
 from flask import flash, request, current_app, send_from_directory
+import psycopg2
 from werkzeug.utils import secure_filename
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from flask_restful import Api
 
 from apirest import api, db
-from apirest.models import Task, TaskSchema, Usuario, task_schema, tasks_schema #, Libro,  libro_schema, libros_schema
+from apirest.models import Task, TaskSchema, Usuario, task_schema, tasks_schema
+from apirest.tasksCelery import comprimir
 
 #OJO hay que revisar ruta
-PATH_FILE = getcwd() + "/archivos/users"
-PATH_FILE_COMPRESS = getcwd() + "/archivosComprimidos/users"
+PATH_FILE = getcwd() + "/archivos/users/"
+PATH_FILE_COMPRESS = getcwd() + "/archivosComprimidos/users/"
 
 def crear_carpeta(usuario):
     try:
         file = PATH_FILE+usuario
         fileCompress = PATH_FILE_COMPRESS+usuario
-        print(file)
         os.makedirs(file)
         os.makedirs(fileCompress)
     except print(0):
@@ -207,3 +208,31 @@ class RecursoCarga(Resource):
             return {'message':'Archivo Cargado'}
         except Exception as e:
             pass
+
+class RecursoComprimir(Resource):
+    def post(self):
+        tasksUploaded = Task.query.filter_by(status = 'uploaded').all()
+        for task in tasksUploaded:
+            id_task = task.id_task
+            usuario = task.usuario_task
+            tipoConversion = task.tipoConversion
+            filename = task.filename
+            nombreArchivo = filename.split('.')[0]
+
+            try:
+                a = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivos/users/"+usuario+"/"+filename
+                b = nombreArchivo+"."+tipoConversion
+                c = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivosComprimidos/users/"+usuario
+                comprimir.delay(a, b, c)
+                conn = psycopg2.connect(host="192.168.0.13", database="libros", user="postgres",password="libros",port="5432")
+                with conn.cursor() as cursor:
+                    query = "UPDATE public.task SET status='processed' WHERE id_task ={}".format(id_task)
+                    cursor.execute(query)
+                    conn.commit()
+                    conn.close()
+
+            except Exception as e:
+                return {'message':'El Archivo no se pudo comprimir'+str(e)}
+            
+        return {'message':'El Archivo se comprimio'}
+        
