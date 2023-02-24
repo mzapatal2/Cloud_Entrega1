@@ -25,7 +25,7 @@ def enviarCorreo(email_to):
     pswd = "rzvszrwcvwumbriy"
     # content of message
     message1 = "Por favor ingrese a nuestra plataforma para descargar su archivo."
-    subject = "Sus archivos comprimidos están listos"
+    subject = "Sus archivos comprimidos estan listos"
     message = 'Subject: {}\n\n{}'.format(subject, message1)
     simple_email_context = ssl.create_default_context()
     try: 
@@ -35,9 +35,9 @@ def enviarCorreo(email_to):
         TIE_server.login(email_from, pswd)
         print("Conectado al servidor ...")
         print()
-        print(f"Enviando notificación a - {email_to}")
+        print(f"Enviando notificacion a - {email_to}")
         TIE_server.sendmail(email_from, email_to, message)
-        print(f"La notificación fue enviada a - {email_to} ")
+        print(f"La notificacion fue enviada a - {email_to} ")
     except Exception as e:
         print(e)
     finally: 

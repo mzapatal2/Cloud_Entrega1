@@ -10,7 +10,7 @@ from flask_restful import Api
 
 from apirest import api, db
 from apirest.models import Task, TaskSchema, Usuario, task_schema, tasks_schema
-from apirest.tasksCelery import comprimir, comprimir_bz2, comprimir_gz, enviarCorreo
+from apirest.tasksCelery import comprimir, comprimir_bz2, comprimir_gz
 
 #OJO hay que revisar ruta
 PATH_FILE = getcwd() + "/archivos/users/"
@@ -214,22 +214,24 @@ class RecursoComprimir(Resource):
         tasksUploaded = Task.query.filter_by(status = 'uploaded').all()
         for task in tasksUploaded:
             id_task = task.id_task
-            usuario = task.usuario_task
+            usuario_tarea = task.usuario_task
             tipoConversion = task.tipoConversion
             filename = task.filename
             nombreArchivo = filename.split('.')[0]
 
             try:
-                a = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivos/users/"+usuario+"/"+filename
+                a = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivos/users/"+usuario_tarea+"/"+filename
                 b = nombreArchivo+"."+tipoConversion
-                c = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivosComprimidos/users/"+usuario
-                email_to = Usuario.email.filter_by(usuario_task = usuario)
+                c = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivosComprimidos/users/"+usuario_tarea
+                email_to = Usuario.query.filter_by(usuario = usuario_tarea).first()
+                d = email_to.email
+                #d = 'paulcalvache3000@gmail.com'
                 if tipoConversion == 'zip':
-                    comprimir.delay(a, b, c, email_to)
+                    comprimir.delay(a, b, c, d)
                 if tipoConversion == 'bz2':
-                    comprimir_bz2.delay(a, b, c, email_to)
+                    comprimir_bz2.delay(a, b, c, d)
                 if tipoConversion == 'gz':
-                    comprimir_gz.delay(a, b, c, email_to)
+                    comprimir_gz.delay(a, b, c, d)
                 conn = psycopg2.connect(host="192.168.0.4", database="libros", user="postgres",password="libros",port="5432")
                 with conn.cursor() as cursor:
                     query = "UPDATE public.task SET status='processed' WHERE id_task ={}".format(id_task)
