@@ -10,7 +10,7 @@ from flask_restful import Api
 
 from apirest import api, db
 from apirest.models import Task, TaskSchema, Usuario, task_schema, tasks_schema
-from apirest.tasksCelery import comprimir, comprimir_bz2, comprimir_gz
+from apirest.tasksCelery import comprimir, comprimir_bz2, comprimir_gz, enviarCorreo
 
 #OJO hay que revisar ruta
 PATH_FILE = getcwd() + "/archivos/users/"
@@ -235,6 +235,9 @@ class RecursoComprimir(Resource):
                     cursor.execute(query)
                     conn.commit()
                     conn.close()
+
+                correoDeUsuario = Usuario.email.filter_by(usuario_task = usuario)
+                enviarCorreo(correoDeUsuario)
 
             except Exception as e:
                 return {'message':'El Archivo no se pudo comprimir'+str(e)}
