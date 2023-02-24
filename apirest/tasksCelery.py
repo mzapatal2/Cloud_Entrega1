@@ -17,25 +17,6 @@ appCelery.conf.broker_url = 'redis://192.168.0.4:6379/0'
 # Creamos una tarea llamada sumar_numeros usando el decorador @app.task
 # Se imprime un mensaje con la fecha simulando un LOG
 
-@appCelery.task(name='tasks.comprimir')
-def comprimir(filename, zipname, new_path):
-    print ('/n-> Se va a comprimir el archivo: {}'.format(filename))
-    zfile = zipfile.ZipFile(new_path + '/' + zipname, 'w')
-    zfile.write(filename, compress_type = zipfile.ZIP_DEFLATED)
-    zfile.close()
-    print ('/n-> El archivo comprimido se copió a : {}'.format(new_path))
-
-@appCelery.task(name='tasks.comprimir_bz2')
-def comprimir_bz2(filename, zipname, new_path):
-    with open(filename, mode='rb') as fin, bz2.open(new_path + '/' + zipname, 'wb') as fout:
-        fout.write(fin.read())
-
-@appCelery.task(name='tasks.comprimir_gz')
-def comprimir_gz(filename, zipname, new_path):
-    with open(filename, "rb") as fin, gzip.open(new_path + '/' + zipname, "wb") as fout:
-        shutil.copyfileobj(fin, fout)
-
-@appCelery.task(name='tasks.enviarCorreo')
 def enviarCorreo(email_to):
     # port number and server name
     smtp_port = 587                     #standard secure SMTP port
@@ -62,5 +43,30 @@ def enviarCorreo(email_to):
     finally: 
         TIE_server.quit()
     return "función enviarCorreo terminada"
+
+@appCelery.task(name='tasks.comprimir')
+def comprimir(filename, zipname, new_path, email_to):
+    print ('/n-> Se va a comprimir el archivo: {}'.format(filename))
+    zfile = zipfile.ZipFile(new_path + '/' + zipname, 'w')
+    zfile.write(filename, compress_type = zipfile.ZIP_DEFLATED)
+    zfile.close()
+    enviarCorreo(email_to)
+    print ('/n-> El archivo comprimido se copió a : {}'.format(new_path))
+
+@appCelery.task(name='tasks.comprimir_bz2')
+def comprimir_bz2(filename, zipname, new_path, email_to):
+    with open(filename, mode='rb') as fin, bz2.open(new_path + '/' + zipname, 'wb') as fout:
+        fout.write(fin.read())
+        enviarCorreo(email_to)
+        print ('/n-> El archivo comprimido se copió a : {}'.format(new_path))
+
+@appCelery.task(name='tasks.comprimir_gz')
+def comprimir_gz(filename, zipname, new_path, email_to):
+    with open(filename, "rb") as fin, gzip.open(new_path + '/' + zipname, "wb") as fout:
+        shutil.copyfileobj(fin, fout)
+        enviarCorreo(email_to)
+        print ('/n-> El archivo comprimido se copió a : {}'.format(new_path))
+
+
 
 

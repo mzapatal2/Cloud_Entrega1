@@ -223,21 +223,19 @@ class RecursoComprimir(Resource):
                 a = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivos/users/"+usuario+"/"+filename
                 b = nombreArchivo+"."+tipoConversion
                 c = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivosComprimidos/users/"+usuario
+                email_to = Usuario.email.filter_by(usuario_task = usuario)
                 if tipoConversion == 'zip':
-                    comprimir.delay(a, b, c)
+                    comprimir.delay(a, b, c, email_to)
                 if tipoConversion == 'bz2':
-                    comprimir_bz2.delay(a, b, c)
+                    comprimir_bz2.delay(a, b, c, email_to)
                 if tipoConversion == 'gz':
-                    comprimir_gz.delay(a, b, c)
+                    comprimir_gz.delay(a, b, c, email_to)
                 conn = psycopg2.connect(host="192.168.0.4", database="libros", user="postgres",password="libros",port="5432")
                 with conn.cursor() as cursor:
                     query = "UPDATE public.task SET status='processed' WHERE id_task ={}".format(id_task)
                     cursor.execute(query)
                     conn.commit()
                     conn.close()
-
-                correoDeUsuario = Usuario.email.filter_by(usuario_task = usuario)
-                enviarCorreo(correoDeUsuario)
 
             except Exception as e:
                 return {'message':'El Archivo no se pudo comprimir'+str(e)}
