@@ -10,7 +10,7 @@ from flask_restful import Api
 
 from apirest import api, db
 from apirest.models import Task, TaskSchema, Usuario, task_schema, tasks_schema
-from apirest.tasksCelery import comprimir
+from apirest.tasksCelery import comprimir, comprimir_bz2, comprimir_gz
 
 #OJO hay que revisar ruta
 PATH_FILE = getcwd() + "/archivos/users/"
@@ -223,8 +223,13 @@ class RecursoComprimir(Resource):
                 a = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivos/users/"+usuario+"/"+filename
                 b = nombreArchivo+"."+tipoConversion
                 c = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivosComprimidos/users/"+usuario
-                comprimir.delay(a, b, c)
-                conn = psycopg2.connect(host="192.168.0.13", database="libros", user="postgres",password="libros",port="5432")
+                if tipoConversion == 'zip':
+                    comprimir.delay(a, b, c)
+                if tipoConversion == 'bz2':
+                    comprimir_bz2.delay(a, b, c)
+                if tipoConversion == 'gz':
+                    comprimir_gz.delay(a, b, c)
+                conn = psycopg2.connect(host="192.168.0.4", database="libros", user="postgres",password="libros",port="5432")
                 with conn.cursor() as cursor:
                     query = "UPDATE public.task SET status='processed' WHERE id_task ={}".format(id_task)
                     cursor.execute(query)
