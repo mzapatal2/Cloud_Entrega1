@@ -1,0 +1,333 @@
+{
+	"id": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+	"name": "Entrega1Cloud",
+	"description": "",
+	"order": [
+		"71d7211f-d59f-82aa-8821-7784edf63469",
+		"b61e3431-a1a4-2e18-4ce2-1bccf53e4baa",
+		"ffac4698-d51d-4e10-ec74-429aac383a3f",
+		"0c907dcf-e3b3-8304-0446-6b5c0c643d79",
+		"b64abc48-9142-3a90-ed4a-01ed267e2054",
+		"2b848a16-c8be-dcc0-29a0-6958db30885c",
+		"f64dd267-ccd6-59df-3d54-d46b74d5decf",
+		"e7ad1391-ff51-6376-deff-92f579f7e934",
+		"98eb77d1-3f8f-d960-3378-f4ab16320f90"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1676843839158,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "0c907dcf-e3b3-8304-0446-6b5c0c643d79",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NzIwNTI1MywianRpIjoiYWY2ZTU5MzMtZjUwMC00M2VjLWE4ZDUtOGUxYWIxZjZlNzU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InBlcGl0byIsIm5iZiI6MTY3NzIwNTI1MywiZXhwIjoxNjc3MjkxNjUzfQ.aGFmlE3XIAq3DihVVBXbDNKQsPmb4zaTHAZb60yplnc\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NzIwNTI1MywianRpIjoiYWY2ZTU5MzMtZjUwMC00M2VjLWE4ZDUtOGUxYWIxZjZlNzU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InBlcGl0byIsIm5iZiI6MTY3NzIwNTI1MywiZXhwIjoxNjc3MjkxNjUzfQ.aGFmlE3XIAq3DihVVBXbDNKQsPmb4zaTHAZb60yplnc",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/tasks",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1677212359447,
+			"name": "CrearTasks",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": [],
+			"rawModeData": "{\n\t\"filename\":\"piel_sana.jpg\",\n\t\"tipoConversion\":\"zip\"\n}"
+		},
+		{
+			"id": "2b848a16-c8be-dcc0-29a0-6958db30885c",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjkzNDYxOSwianRpIjoiYzViMjc2N2YtMTM0OC00ZjkxLThiNTQtZDBiYzQ3OTY4NjkwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im5pY28iLCJuYmYiOjE2NzY5MzQ2MTksImV4cCI6MTY3NzAyMTAxOX0.dxGb7_IHs7vt_P6Nt3EAQlhhr7VRLYENokwsgEiwEdg\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjkzNDYxOSwianRpIjoiYzViMjc2N2YtMTM0OC00ZjkxLThiNTQtZDBiYzQ3OTY4NjkwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im5pY28iLCJuYmYiOjE2NzY5MzQ2MTksImV4cCI6MTY3NzAyMTAxOX0.dxGb7_IHs7vt_P6Nt3EAQlhhr7VRLYENokwsgEiwEdg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/files/Entrega1Cloud.postman_collection.json",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1676935197146,
+			"name": "RecueparArchivo",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": []
+		},
+		{
+			"id": "71d7211f-d59f-82aa-8821-7784edf63469",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/auth/signup",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1677132443825,
+			"name": "RegistroUsuario",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": [],
+			"rawModeData": "{\n\t\"email\":\"pepito@example.com\",\n\t\"password\":\"Cloud2023\",\n\t\"password1\":\"Cloud2023\",\n\t\"usuario\":\"pepito\"\n}"
+		},
+		{
+			"id": "98eb77d1-3f8f-d960-3378-f4ab16320f90",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/files/comprimir",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"data": [],
+			"dataMode": "params",
+			"name": "CeleryComprimir",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1677131810347,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "b61e3431-a1a4-2e18-4ce2-1bccf53e4baa",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/auth/login",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1677132594079,
+			"name": "LoginUsuario",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": [],
+			"rawModeData": "{\n\t\"usuario\":\"pepito\",\n\t\"password\":\"Cloud2023\"\n}"
+		},
+		{
+			"id": "b64abc48-9142-3a90-ed4a-01ed267e2054",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3Njg1NTQ2NiwianRpIjoiNmQ1MDMwMzUtYzA3Mi00MzVkLWIyNDUtYWYzYzI3ZDlmYzZiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im1hdGVvIiwibmJmIjoxNjc2ODU1NDY2LCJleHAiOjE2NzY5NDE4NjZ9.d7K1CXHfzMrjE2SUQ34biXqiWW7dk_N9bwxxqn-7awo\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3Njg1NTQ2NiwianRpIjoiNmQ1MDMwMzUtYzA3Mi00MzVkLWIyNDUtYWYzYzI3ZDlmYzZiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im1hdGVvIiwibmJmIjoxNjc2ODU1NDY2LCJleHAiOjE2NzY5NDE4NjZ9.d7K1CXHfzMrjE2SUQ34biXqiWW7dk_N9bwxxqn-7awo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/tasks/11",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1676934851983,
+			"name": "DeleteTasks",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": []
+		},
+		{
+			"id": "e7ad1391-ff51-6376-deff-92f579f7e934",
+			"headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3Njk1MDY0OCwianRpIjoiZmI2ODRiMzQtMDQyMi00ZjNiLWE2NGItNjY1ODIxZjdlNGVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImZhYmlhbiIsIm5iZiI6MTY3Njk1MDY0OCwiZXhwIjoxNjc3MDM3MDQ4fQ.WSxdb-oMdT5eQyVv_37CR-mGNs7rOvcaqqnIcFTAKJ4\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3Njk1MDY0OCwianRpIjoiZmI2ODRiMzQtMDQyMi00ZjNiLWE2NGItNjY1ODIxZjdlNGVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImZhYmlhbiIsIm5iZiI6MTY3Njk1MDY0OCwiZXhwIjoxNjc3MDM3MDQ4fQ.WSxdb-oMdT5eQyVv_37CR-mGNs7rOvcaqqnIcFTAKJ4",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/files/delete/archivoOriginal.txt",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1676950755490,
+			"name": "EliminarArchivo",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": []
+		},
+		{
+			"id": "f64dd267-ccd6-59df-3d54-d46b74d5decf",
+			"headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NzIwNzc3OCwianRpIjoiNTI5OWRhZmMtZWZlMS00NzFjLTkzM2UtMDlmMzViOWU4MTVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InBlcGl0byIsIm5iZiI6MTY3NzIwNzc3OCwiZXhwIjoxNjc3Mjk0MTc4fQ.vrLsHSHq-jNEQQE75i9SeyvOXnwHIxuxEec-94gNAeY\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NzIwNzc3OCwianRpIjoiNTI5OWRhZmMtZWZlMS00NzFjLTkzM2UtMDlmMzViOWU4MTVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InBlcGl0byIsIm5iZiI6MTY3NzIwNzc3OCwiZXhwIjoxNjc3Mjk0MTc4fQ.vrLsHSHq-jNEQQE75i9SeyvOXnwHIxuxEec-94gNAeY",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/files",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "file",
+					"value": "piel_sana.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1677212361198,
+			"name": "CargaArchivo",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": []
+		},
+		{
+			"id": "ffac4698-d51d-4e10-ec74-429aac383a3f",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjkzNDYxOSwianRpIjoiYzViMjc2N2YtMTM0OC00ZjkxLThiNTQtZDBiYzQ3OTY4NjkwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im5pY28iLCJuYmYiOjE2NzY5MzQ2MTksImV4cCI6MTY3NzAyMTAxOX0.dxGb7_IHs7vt_P6Nt3EAQlhhr7VRLYENokwsgEiwEdg\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NjkzNDYxOSwianRpIjoiYzViMjc2N2YtMTM0OC00ZjkxLThiNTQtZDBiYzQ3OTY4NjkwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Im5pY28iLCJuYmYiOjE2NzY5MzQ2MTksImV4cCI6MTY3NzAyMTAxOX0.dxGb7_IHs7vt_P6Nt3EAQlhhr7VRLYENokwsgEiwEdg",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:5000/api/tasks?order=0&max=10",
+			"queryParams": [
+				{
+					"key": "order",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "max",
+					"value": "10",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1676934656030,
+			"name": "ListarTasks",
+			"description": "",
+			"collectionId": "dda3dfc5-4189-5faf-4aff-35faf819d861",
+			"responses": []
+		}
+	]
+}
