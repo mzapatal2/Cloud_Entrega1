@@ -52,7 +52,7 @@ class TaskSchema(ma.Schema):
     Representa el schema de un concurso
     '''
     class Meta:
-        fields = ("id", "nombre", "rutaArchivo", "rutaCompresion", "disponible", "tipoConversion", "fechaCarga", "usuario_task")
+        fields = ("id_task", "filename", "rutaArchivo", "rutaCompresion", "status", "tipoConversion", "fechaCarga", "usuario_task")
 
 usuario_schema = UsuarioSchema()
 task_schema = TaskSchema()

@@ -12,8 +12,8 @@ import ssl
 import psycopg2
 
 
-appCelery = Celery('tasks' , backend = 'redis://192.168.0.4:6379/0', broker = 'redis://192.168.0.4:6379/0')
-appCelery.conf.broker_url = 'redis://192.168.0.4:6379/0'
+appCelery = Celery('tasks' , backend = 'redis://192.168.10.37/0', broker = 'redis://192.168.10.37:6379/0')
+appCelery.conf.broker_url = 'redis://192.168.10.37:6379/0'
 # Creamos una tarea llamada sumar_numeros usando el decorador @app.task
 # Se imprime un mensaje con la fecha simulando un LOG
 

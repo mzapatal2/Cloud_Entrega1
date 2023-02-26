@@ -232,7 +232,7 @@ class RecursoComprimir(Resource):
                     comprimir_bz2.delay(a, b, c, d)
                 if tipoConversion == 'gz':
                     comprimir_gz.delay(a, b, c, d)
-                conn = psycopg2.connect(host="192.168.0.4", database="libros", user="postgres",password="libros",port="5432")
+                conn = psycopg2.connect(host="192.168.0.6", database="libros", user="postgres",password="libros",port="5432")
                 with conn.cursor() as cursor:
                     query = "UPDATE public.task SET status='processed' WHERE id_task ={}".format(id_task)
                     cursor.execute(query)
