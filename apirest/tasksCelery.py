@@ -21,8 +21,8 @@ def enviarCorreo(email_to):
     # port number and server name
     smtp_port = 587                     #standard secure SMTP port
     smtp_server = "smtp.gmail.com"      #Google SMTP Server
-    email_from = "cloud2023g1@gmail.com"
-    pswd = "rzvszrwcvwumbriy"
+    email_from = "" #Se debe crear cuenta en gmail para enviar correos, la anterior fue utilizada para enviar phising.
+    pswd = ""
     # content of message
     message1 = "Por favor ingrese a nuestra plataforma para descargar su archivo."
     subject = "Sus archivos comprimidos estan listos"

@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
+    content %}
+    <form action="" id="singUpForm">
+      <h3 allign="center">Sign Up</h3>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="usuario">usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="usuario"
+          name="usuario"
+          placeholder="Enter user name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password1">Password (Confirm)</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password1"
+          name="password1"
+          placeholder="Confirm password"
+        />
+      </div>
+      <br />
+      <button id="enviar" type="button" class="btnSubmit">Submit</button>
+    </form>
+    <script>  
+      document.getElementById('enviar').addEventListener("click", event => {
+  
+      var email = document.getElementById('email').value;
+      var usuario = document.getElementById('usuario').value;
+      var password =document.getElementById('password').value;
+      var password1 =document.getElementById('password1').value;
+  
+      var objectToSend = {"email": email, "usuario":usuario, "password":password,"password1":password1 };
+      console.log("Objeto para enviar", objectToSend)
+  
+  
+          event.preventDefault();
+          fetch('http://127.0.0.1:5000/api/auth/signup', {
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objectToSend)
+          }).then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+            window.location.href = "http://127.0.0.1:5000/login";
+      });
+      
+    </script> 
+    {% endblock %}

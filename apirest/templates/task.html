@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}tasks{% endblock %} {% block content
+  %}
+<form action="" id="taskForm">
+  <h3 allign="center">create task</h3>
+  <div class="form-group">
+    <label for="filename">filename</label>
+    <input
+      type="text"
+      class="form-control"
+      id="filename"
+      name="filename"
+      placeholder="Enter your file name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="tipoConversion">tipo Conversion</label>
+    <input
+      type="text"
+      class="form-control"
+      id="tipoConversion"
+      name="tipoConversion"
+      placeholder="zip, rar, targz "
+    />
+  <br />
+  <button id="enviar" class="btnSubmit">crear task</button>
+</form>
+<script>
+
+  var query = window.location.search.substring(1);
+  document.getElementById('enviar').addEventListener("click", event => {  
+
+  var filename = document.getElementById('filename').value;
+  var tipoConversion =document.getElementById('tipoConversion').value;
+  var objectToSend = {"filename":filename, "tipoConversion":tipoConversion};
+          event.preventDefault();
+          fetch('http://127.0.0.1:5000/api/tasks', {
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer '+query
+            },
+            body: JSON.stringify(objectToSend)
+          }).then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+            //window.location.href = "http://127.0.0.1:5000/tasks?"+query;
+            window.location.href = "http://127.0.0.1:5000/index?"+query;
+      });
+      
+    </script>     
+{% endblock %}

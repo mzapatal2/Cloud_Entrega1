@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}upload{% endblock %} 
+{% block content %}
+<body>
+    <form action = "" id = "uploadForm">
+        <div>
+            <label for="formFileLg" class="form-label">cargar Archivo</label>
+            <input class="form-control form-control-lg" id="formFileLg" type="file">
+          </div>
+         <br />
+      <button id="enviar" type="button" class="btnSubmit">Enviar</button>
+    </form>   
+ </body>
+ <script>
+    
+    document.getElementById('enviar').addEventListener("click", event => {
+        
+        
+        var query = window.location.search.substring(1);
+
+        console.log(query);
+        let file = document.getElementById('formFileLg').files[0];
+        let formData = new FormData();
+        formData.append("file", file);
+        //event.preventDefault();
+        fetch('http://127.0.0.1:5000/api/files', {
+          method:'POST',
+         headers: {Authorization: 'Bearer '+query},
+         body: formData
+        }).catch(error => console.log(error))
+           window.location.href = "http://127.0.0.1:5000/tasks?"+query;
+    });
+        
+  </script>
+
+{% endblock %}

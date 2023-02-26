@@ -1,0 +1,141 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}{% block content%}
+
+{% block body %}
+<div id="tareasList" class="tareas-list"></div>
+<div id="ejecutarWorker" class="card-body py-2 px-3"></div>
+<script>
+
+window.addEventListener('DOMContentLoaded', () => {
+  getTareas();
+})
+var token = window.location.search.substring(1);
+
+const getTareas = () => {
+  fetch('http://127.0.0.1:5000/api/tasks?order=0&max=10',{
+            method:'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer '+token
+            }}).then(response => response.json())
+               .catch(error => {
+   // alertManager('error', 'Ocurrión un problema al cargar los tareas');
+  })
+  .then(data => {
+    tareas = data;
+    renderResult(tareas);
+    renderBoton(tareas);
+  })
+}
+
+const tareasList = document.querySelector('#tareasList');
+
+const renderResult = (tareas) => {
+  let listHTML = "";
+  tareas.forEach(tarea => {
+    listHTML += `
+      <div class="card">
+        <div>file name: ${tarea.filename}</div>
+        <div>ruta Archivo: ${tarea.rutaArchivo}</div>
+        <div>ruta Compresion: ${tarea.rutaCompresion}</div>
+        <div>status: ${tarea.status}</div>
+        <div>tipo Conversion: ${tarea.tipoConversion}</div>
+        <div>fecha carga: ${tarea.fechaCarga}</div>
+        <div class="options">
+          <button type="button" onclick="deleteTarea(${tarea.id_task})">Eliminar</button>
+          <button type="button" onclick="descargarTarea(${tarea.id_task})">descarga</button>
+        </div>
+      </div>
+    `
+  })
+  tareasList.innerHTML = listHTML;
+
+
+}
+
+const worker = document.querySelector('#ejecutarWorker');
+
+const renderBoton = (tareas) => {
+  let listHTML = "";
+      listHTML = `
+      <div class="card">
+        <div class="options">
+            <button type="button" onclick="ejecutarWorker()">worker</button>
+        </div>
+      </div>
+    `
+  
+  worker.innerHTML = listHTML;
+
+
+}
+
+
+const deleteTarea = (id_task) => {
+  let tarea = {};
+  tareas.filter(event => {
+    if(event.id_task == id_task){
+      tarea = event
+    }
+  });
+  fetch('/api/tasks/'+tarea.id_task, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token
+    },
+  })
+  .then(res => res.json())
+  .catch(error => {
+    alertManager('error', error);
+  })
+  .then(response => {
+    getTareas();
+    deleteId = '';
+  })
+}
+
+const descargarTarea = (id_task) => {
+  let tarea = {};
+  tareas.filter(event => {
+    if(event.id_task == id_task){
+      tarea = event
+    }
+  });
+  fetch('http://127.0.0.1:5000/api/files/'+tarea.filename, {
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer '+token
+    },
+  })
+  .then( res => res.blob() )
+  .then( blob => {
+    var file = window.URL.createObjectURL(blob);
+    window.location.assign(file);
+  })
+  .catch(error => {console.log(error)
+  })
+  .then(response => {
+    getTareas();
+  })
+}
+
+const ejecutarWorker = (id_task) => {
+  let tarea = {};
+  tareas.filter(event => {
+    if(event.id_task == id_task){
+      tarea = event
+    }
+  });
+  fetch('http://127.0.0.1:5000/api/files/comprimir', {
+    method: 'POST',
+  })
+  .catch(error => {console.log(error)
+  })
+  .then(response => {
+    getTareas();
+  })
+}
+</script>
+
+{% endblock %}
+{% endblock %}

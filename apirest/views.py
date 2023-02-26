@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import os
 from os import getcwd
-from flask import flash, request, current_app, send_from_directory
+from flask import Response, flash, render_template, request, current_app, send_from_directory
 import psycopg2
 from werkzeug.utils import secure_filename
 from flask_restful import Resource, reqparse
@@ -243,4 +243,24 @@ class RecursoComprimir(Resource):
                 return {'message':'El Archivo no se pudo comprimir'+str(e)}
             
         return {'message':'El Archivo se comprimio'}
-        
+    
+
+class RecursoRegistroWeb(Resource):
+    def get(self):
+        return Response(render_template("sing_up.html"))
+    
+class RecursoLoginWeb(Resource):
+    def get(self):
+        return Response(render_template("login.html"))      
+
+class RecursoTasksWeb(Resource):
+    def get(self):
+        return Response(render_template("task.html")) 
+    
+class RecursoUploadWeb(Resource):
+    def get(self):
+        return Response(render_template("upload.html"))
+    
+class RecursoindexWeb(Resource):
+    def get(self):
+        return Response(render_template("index.html"))

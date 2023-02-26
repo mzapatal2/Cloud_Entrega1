@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+    %}
+    <form action="" id="loginForm">
+      <h3 allign="center">Login</h3>
+      <div class="form-group">
+        <label for="usuario">usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="usuario"
+          name="usuario"
+          placeholder="Enter your user Name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+        />
+      </div>
+      <br />
+      <button id="enviar" type="button" class="btnSubmit">Login</button>
+    </form>
+    <script>
+
+    document.getElementById('enviar').addEventListener("click", event => {  
+
+    var usuario = document.getElementById('usuario').value;
+    var password =document.getElementById('password').value;   
+
+    var objectToSend = {"usuario":usuario, "password":password};
+    //console.log("Objeto para enviar", objectToSend)
+    
+        event.preventDefault();
+  
+        const fetchData = fetch('http://127.0.0.1:5000/api/auth/login', {
+          method:'POST',
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(objectToSend)
+        }).then(res => res.json())
+          //.then(data => console.log(data.access_token))
+          .then(data => {token = data;renderResult(token);})
+          .catch(error => console.log(error))
+    });
+  const renderResult = (token) => {
+    console.log(token['access_token'])
+    window.location.href = "http://127.0.0.1:5000/upload?"+token['access_token'];
+    
+  }
+  
+
+  </script> 
+  {% endblock %}
