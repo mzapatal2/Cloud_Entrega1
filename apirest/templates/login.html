@@ -37,7 +37,7 @@
     
         event.preventDefault();
   
-        const fetchData = fetch('http://127.0.0.1:5000/api/auth/login', {
+        const fetchData = fetch('/api/auth/login', {
           method:'POST',
           headers: {
           'Content-Type': 'application/json'
@@ -50,7 +50,7 @@
     });
   const renderResult = (token) => {
     console.log(token['access_token'])
-    window.location.href = "http://127.0.0.1:5000/upload?"+token['access_token'];
+    window.location.href = "/upload?"+token['access_token'];
     
   }
   

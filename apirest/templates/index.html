@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
 var token = window.location.search.substring(1);
 
 const getTareas = () => {
-  fetch('http://127.0.0.1:5000/api/tasks?order=0&max=10',{
+  fetch('/api/tasks?order=0&max=10',{
             method:'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const descargarTarea = (id_task) => {
       tarea = event
     }
   });
-  fetch('http://127.0.0.1:5000/api/files/'+tarea.filename, {
+  fetch('/api/files/'+tarea.filename, {
     method: 'GET',
     headers: {
         'Authorization': 'Bearer '+token
@@ -126,7 +126,7 @@ const ejecutarWorker = (id_task) => {
       tarea = event
     }
   });
-  fetch('http://127.0.0.1:5000/api/files/comprimir', {
+  fetch('/api/files/comprimir', {
     method: 'POST',
   })
   .catch(error => {console.log(error)

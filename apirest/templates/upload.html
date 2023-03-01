@@ -22,12 +22,12 @@
         let formData = new FormData();
         formData.append("file", file);
         //event.preventDefault();
-        fetch('http://127.0.0.1:5000/api/files', {
+        fetch('/api/files', {
           method:'POST',
          headers: {Authorization: 'Bearer '+query},
          body: formData
         }).catch(error => console.log(error))
-           window.location.href = "http://127.0.0.1:5000/tasks?"+query;
+           window.location.href = "/tasks?"+query;
     });
         
   </script>

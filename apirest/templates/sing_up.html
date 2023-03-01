@@ -58,7 +58,7 @@
   
   
           event.preventDefault();
-          fetch('http://127.0.0.1:5000/api/auth/signup', {
+          fetch('/api/auth/signup', {
             method:'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -67,7 +67,7 @@
           }).then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.log(error))
-            window.location.href = "http://127.0.0.1:5000/login";
+            window.location.href = "/login";
       });
       
     </script> 

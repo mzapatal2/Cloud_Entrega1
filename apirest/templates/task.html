@@ -33,7 +33,7 @@
   var tipoConversion =document.getElementById('tipoConversion').value;
   var objectToSend = {"filename":filename, "tipoConversion":tipoConversion};
           event.preventDefault();
-          fetch('http://127.0.0.1:5000/api/tasks', {
+          fetch('/api/tasks', {
             method:'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -43,8 +43,8 @@
           }).then(res => res.json())
             .then(data => console.log(data))
             .catch(error => console.log(error))
-            //window.location.href = "http://127.0.0.1:5000/tasks?"+query;
-            window.location.href = "http://127.0.0.1:5000/index?"+query;
+            //window.location.href = "/tasks?"+query;
+            window.location.href = "/index?"+query;
       });
       
     </script>     
