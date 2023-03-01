@@ -15,10 +15,10 @@ api = Api()
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
-    try:
-        app.config.from_pyfile('config.py')
-    except:
-        pass
+    #try:
+    app.config.from_pyfile('config.py')
+    #except:
+    #    pass
 
     db.init_app(app)
     ma.init_app(app)
