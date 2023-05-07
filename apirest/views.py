@@ -12,6 +12,8 @@ from apirest import api, db
 from apirest.models import Task, TaskSchema, Usuario, task_schema, tasks_schema
 from apirest.tasksCelery import comprimir, comprimir_bz2, comprimir_gz
 
+from DemoCloudStorage import write_read
+
 #OJO hay que revisar ruta
 PATH_FILE = getcwd() + "/archivos/users/"
 PATH_FILE_COMPRESS = getcwd() + "/archivosComprimidos/users/"
@@ -77,6 +79,7 @@ class RecursoRegistro(Resource):
             db.session.commit()
             access_token = create_access_token(identity = request.json['email'], expires_delta = timedelta(days = 1))
             crear_carpeta(nuevo_usuario.usuario)
+            write_read('cloudentrega4', nuevo_usuario.usuario+'/')
             return {
                 'message': f'El correo {request.json["email"]} ha sido registrado',
                 'access_token': access_token 
