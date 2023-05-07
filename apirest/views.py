@@ -12,7 +12,7 @@ from apirest import api, db
 from apirest.models import Task, TaskSchema, Usuario, task_schema, tasks_schema
 from apirest.tasksCelery import comprimir, comprimir_bz2, comprimir_gz
 
-from DemoCloudStorage import write_read
+from google.cloud import storage
 
 #OJO hay que revisar ruta
 PATH_FILE = getcwd() + "/archivos/users/"
@@ -26,6 +26,26 @@ def crear_carpeta(usuario):
         os.makedirs(fileCompress)
     except print(0):
         pass
+
+def write_read(bucket_name, blob_name):
+    """Write and read a blob from GCS using file-like IO"""
+    # The ID of your GCS bucket
+    # bucket_name = "your-bucket-name"
+
+    # The ID of your new GCS object
+    # blob_name = "storage-object-name"
+
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+
+    # Mode can be specified as wb/rb for bytes mode.
+    # See: https://docs.python.org/3/library/io.html
+    with blob.open("w") as f:
+        f.write("Hello world")
+
+    with blob.open("r") as f:
+        print(f.read())
 
 
 '''
@@ -79,6 +99,7 @@ class RecursoRegistro(Resource):
             db.session.commit()
             access_token = create_access_token(identity = request.json['email'], expires_delta = timedelta(days = 1))
             crear_carpeta(nuevo_usuario.usuario)
+            storage_client = storage.Client()
             write_read('cloudentrega4', 'archivos/'+nuevo_usuario.usuario+'/')
             write_read('cloudentrega4', 'archivosComprimidos/'+nuevo_usuario.usuario+'/')
             return {
@@ -208,6 +229,7 @@ class RecursoCarga(Resource):
             file = request.files['file']
             if file.filename == '':
                 print('No selected file')
+            storage_client = storage.Client()
             write_read('cloudentrega4', 'archivosComprimidos/'+usuario+'/'+file.filename)
             file.save(PATH_FILE + usuario +'/'+ file.filename)
             return {'message':'Archivo Cargado'}
