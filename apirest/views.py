@@ -79,7 +79,8 @@ class RecursoRegistro(Resource):
             db.session.commit()
             access_token = create_access_token(identity = request.json['email'], expires_delta = timedelta(days = 1))
             crear_carpeta(nuevo_usuario.usuario)
-            write_read('cloudentrega4', nuevo_usuario.usuario+'/')
+            write_read('cloudentrega4', 'archivos/'+nuevo_usuario.usuario+'/')
+            write_read('cloudentrega4', 'archivosComprimidos/'+nuevo_usuario.usuario+'/')
             return {
                 'message': f'El correo {request.json["email"]} ha sido registrado',
                 'access_token': access_token 
@@ -207,6 +208,7 @@ class RecursoCarga(Resource):
             file = request.files['file']
             if file.filename == '':
                 print('No selected file')
+            write_read('cloudentrega4', 'archivosComprimidos/'+usuario+'/'+file.filename)
             file.save(PATH_FILE + usuario +'/'+ file.filename)
             return {'message':'Archivo Cargado'}
         except Exception as e:
@@ -223,19 +225,19 @@ class RecursoComprimir(Resource):
             nombreArchivo = filename.split('.')[0]
 
             try:
-                a = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivos/users/"+usuario_tarea+"/"+filename
+                a = "/home/chechojuli/Cloud_Entrega1/archivos/users/"+usuario_tarea+"/"+filename
                 b = nombreArchivo+"."+tipoConversion
-                c = "C:/Users/Usuario/Documents/Mateo Zapata/MINE Uniandes/Desarrollo de Soluciones Cloud/Entrega1/archivosComprimidos/users/"+usuario_tarea
+                c = "/home/chechojuli/Cloud_Entrega1/archivos/users/"+usuario_tarea
                 email_to = Usuario.query.filter_by(usuario = usuario_tarea).first()
                 d = email_to.email
                 #d = 'paulcalvache3000@gmail.com'
                 if tipoConversion == 'zip':
-                    comprimir.delay(a, b, c, d)
+                    comprimir.delay(a, b, c, d, usuario_tarea, filename)
                 if tipoConversion == 'bz2':
-                    comprimir_bz2.delay(a, b, c, d)
+                    comprimir_bz2.delay(a, b, c, d, usuario_tarea, filename)
                 if tipoConversion == 'gz':
-                    comprimir_gz.delay(a, b, c, d)
-                conn = psycopg2.connect(host="192.168.0.6", database="libros", user="postgres",password="libros",port="5432")
+                    comprimir_gz.delay(a, b, c, d, usuario_tarea, filename)
+                conn = psycopg2.connect(host="35.238.249.116", database="libros", user="postgres",password="libros",port="5432")
                 with conn.cursor() as cursor:
                     query = "UPDATE public.task SET status='processed' WHERE id_task ={}".format(id_task)
                     cursor.execute(query)

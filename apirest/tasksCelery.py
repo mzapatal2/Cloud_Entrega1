@@ -11,6 +11,8 @@ import ssl
 
 import psycopg2
 
+from apirest.DemoCloudStorage import write_read
+
 
 appCelery = Celery('tasks' , backend = 'redis://127.0.0.1/0', broker = 'redis://127.0.0.1:6379/0')
 appCelery.conf.broker_url = 'redis://127.0.0.1:6379/0'
@@ -45,25 +47,28 @@ def enviarCorreo(email_to):
     return "función enviarCorreo terminada"
 
 @appCelery.task(name='tasks.comprimir')
-def comprimir(filename, zipname, new_path, email_to):
+def comprimir(filename, zipname, new_path, email_to, usuario_tarea, filenameCloud):
     print ('/n-> Se va a comprimir el archivo: {}'.format(filename))
     zfile = zipfile.ZipFile(new_path + '/' + zipname, 'w')
     zfile.write(filename, compress_type = zipfile.ZIP_DEFLATED)
     zfile.close()
+    write_read('cloudentrega4', 'archivosComprimidos/'+usuario_tarea+'/'+zfile)
     enviarCorreo(email_to)
     print ('/n-> El archivo comprimido se copió a : {}'.format(new_path))
 
 @appCelery.task(name='tasks.comprimir_bz2')
-def comprimir_bz2(filename, zipname, new_path, email_to):
+def comprimir_bz2(filename, zipname, new_path, email_to, usuario_tarea, filenameCloud):
     with open(filename, mode='rb') as fin, bz2.open(new_path + '/' + zipname, 'wb') as fout:
         fout.write(fin.read())
+        write_read('cloudentrega4', 'archivosComprimidos/'+usuario_tarea+'/'+fout)
         enviarCorreo(email_to)
         print ('/n-> El archivo comprimido se copió a : {}'.format(new_path))
 
 @appCelery.task(name='tasks.comprimir_gz')
-def comprimir_gz(filename, zipname, new_path, email_to):
+def comprimir_gz(filename, zipname, new_path, email_to, usuario_tarea, filenameCloud):
     with open(filename, "rb") as fin, gzip.open(new_path + '/' + zipname, "wb") as fout:
         shutil.copyfileobj(fin, fout)
+        write_read('cloudentrega4', 'archivosComprimidos/'+usuario_tarea+'/'+fout)    
         enviarCorreo(email_to)
         print ('/n-> El archivo comprimido se copió a : {}'.format(new_path))
 
