@@ -231,6 +231,7 @@ class RecursoCarga(Resource):
                 print('No selected file')
             storage_client = storage.Client()
             write_read('cloudentrega4', 'archivos/'+usuario+'/'+file.filename)
+            write_read('cloudentrega4', file.filename)
             file.save(PATH_FILE + usuario +'/'+ file.filename)
             return {'message':'Archivo Cargado'}
         except Exception as e:
