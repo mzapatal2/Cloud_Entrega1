@@ -1,8 +1,8 @@
 # Use an official Python runtime as the base image
-FROM python:3.11
+FROM python:3.10.11
 
 # Set the working directory in the container to /app
-WORKDIR /readings
+WORKDIR /apirest
 
 # Copy the rest of the application code to the container
 COPY . .
